@@ -1,0 +1,42 @@
+@baseURL = http://localhost:3333
+@authToken = {{authenticate.response.body.access_token}}
+
+# @name create_account
+POST {{baseURL}}/accounts
+Content-Type: application/json
+
+{
+  "name": "Lucas de Lima Nascimento",
+  "email": "lucaslnascimento090@gmail.com",
+  "password": "Corp@12345"
+}
+
+###
+
+# @name authenticate
+POST {{baseURL}}/sessions
+Content-Type: application/json
+
+{
+  "email": "lucaslnascimento090@gmail.com",
+  "password": "Corp@12345"
+}
+
+###
+
+# @name create_question
+POST {{baseURL}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "Já treinou vôlei de praia?",
+  "content": "vôlei de praia"
+}
+
+###
+
+# @name fecth_recent_questions
+GET {{baseURL}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
